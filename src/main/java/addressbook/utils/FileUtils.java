@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import static org.apache.commons.lang3.Validate.notNull;
 
 /**
  * Provides set of utils for operating on file
@@ -24,7 +24,7 @@ public class FileUtils {
      * @throws NullPointerException if file name is null
      */
     public static List<String> readLines(String fileName) {
-        requireNonNull(fileName);
+        notNull(fileName);
 
         URL url = Resources.getResource(fileName);
         try {

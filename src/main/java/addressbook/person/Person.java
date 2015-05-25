@@ -1,7 +1,6 @@
 package addressbook.person;
 
 public class Person {
-
     private final String name;
     private final String gender;
     private final String dateOfBirth;
