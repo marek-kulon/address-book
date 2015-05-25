@@ -1,0 +1,31 @@
+# eclipse
+bin/
+.classpath
+.project
+.settings
+*.launch
+.externalToolBuilders/
+
+
+# intellij
+.idea/
+*.ipr
+*.iml
+*.iws
+
+# java
+*.class
+
+# gradle
+build/
+.gradle
+
+# package files
+*.jar
+
+# other
+*.swp
+*.log
+*.bak
+*.out
+*.lock
