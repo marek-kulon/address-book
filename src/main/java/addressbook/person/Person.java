@@ -1,5 +1,10 @@
 package addressbook.person;
 
+import org.apache.commons.lang3.Validate;
+
+import java.util.Optional;
+import java.util.stream.Stream;
+
 public class Person {
     private final String name;
     private final String gender;
@@ -21,5 +26,26 @@ public class Person {
 
     public String getDateOfBirth() {
         return dateOfBirth;
+    }
+
+
+    /**
+     * Represents gender of person
+     */
+    enum Gender {
+        MALE, FEMALE;
+
+        /**
+         * Finds gender by name regardless of its case
+         * @param name candidate value
+         * @return found gender or empty value
+         */
+        public static Optional<Gender> findByNameIgnoreCase(String name) {
+            Validate.notNull(name);
+
+            return Stream.of(Gender.values())
+                    .filter(val -> val.name().equalsIgnoreCase(name))
+                    .findAny();
+        }
     }
 }
