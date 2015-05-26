@@ -3,6 +3,7 @@ package addressbook.utils;
 import addressbook.person.Person;
 import org.junit.Test;
 
+import static addressbook.person.Person.*;
 import static org.junit.Assert.*;
 
 public class StringToPersonConverterTest {
@@ -12,7 +13,7 @@ public class StringToPersonConverterTest {
         Person p = StringToPersonConverter.byCommaAndSpaceSeparator("Bill McKnight, Male, 16/03/77");
         assertNotNull(p);
         assertEquals("Bill McKnight", p.getName());
-        assertEquals("Male", p.getGender());
+        assertEquals(Gender.MALE, p.getGender());
         assertEquals("16/03/77", p.getDateOfBirth());
     }
 

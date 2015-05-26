@@ -7,10 +7,10 @@ import java.util.stream.Stream;
 
 public class Person {
     private final String name;
-    private final String gender;
+    private final Gender gender;
     private final String dateOfBirth;
 
-    public Person(String name, String gender, String dateOfBirth) {
+    public Person(String name, Gender gender, String dateOfBirth) {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.name = name;
@@ -20,7 +20,7 @@ public class Person {
         return name;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
@@ -32,7 +32,7 @@ public class Person {
     /**
      * Represents gender of person
      */
-    enum Gender {
+    public enum Gender {
         MALE, FEMALE;
 
         /**
