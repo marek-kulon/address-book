@@ -10,18 +10,24 @@ import java.util.stream.Stream;
  * Represents entry unit of address book
  */
 public class Person {
-    private final String name;
+    private final String firstName;
+    private final String lastName;
     private final Gender gender;
     private final LocalDate dateOfBirth;
 
-    public Person(String name, Gender gender, LocalDate dateOfBirth) {
+    public Person(String firstName, String lastName, Gender gender, LocalDate dateOfBirth) {
+        this.firstName = firstName;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
-        this.name = name;
+        this.lastName = lastName;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public Gender getGender() {

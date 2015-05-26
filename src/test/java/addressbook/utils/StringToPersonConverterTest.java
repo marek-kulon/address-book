@@ -16,7 +16,8 @@ public class StringToPersonConverterTest {
     public void byCommaAndSpaceSeparatorInputOk() {
         Person p = StringToPersonConverter.byCommaAndSpaceSeparator("Bill McKnight, Male, 16/03/88");
         assertNotNull(p);
-        assertEquals("Bill McKnight", p.getName());
+        assertEquals("Bill", p.getFirstName());
+        assertEquals("McKnight", p.getLastName());
         assertEquals(Gender.MALE, p.getGender());
         assertEquals(LocalDate.of(1988, Month.MARCH, 16), p.getDateOfBirth());
     }

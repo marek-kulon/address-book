@@ -31,11 +31,19 @@ public class StringToPersonConverter {
         String[] parts = value.split(",\\s");
         isTrue(parts.length == 3);
 
-        LocalDate dobRow = LocalDate.parse(parts[2], DATE_TIME_FORMATTER);
+        final String[] fullNameParts = parts[0].split("\\s");
+        isTrue(fullNameParts.length == 2);
+
+
+        final String firstName = fullNameParts[0];
+        final String lastName = fullNameParts[1];
+        final Person.Gender gender = Person.Gender.findByNameIgnoreCase(parts[1]).get();
+        final LocalDate dobRow = LocalDate.parse(parts[2], DATE_TIME_FORMATTER);
 
         return new Person(
-                parts[0],
-                Person.Gender.findByNameIgnoreCase(parts[1]).get(),
+                firstName,
+                lastName,
+                gender,
                 dobRow.isBefore(LocalDate.now()) ? dobRow : dobRow.minusYears(100) // making sure person is born in the past
         );
     }
