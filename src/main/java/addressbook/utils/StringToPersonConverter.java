@@ -2,6 +2,8 @@ package addressbook.utils;
 
 import addressbook.person.Person;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.NoSuchElementException;
 
 import static org.apache.commons.lang3.Validate.isTrue;
@@ -11,6 +13,8 @@ import static org.apache.commons.lang3.Validate.notEmpty;
  * Collection of utility methods for converting strings into person
  */
 public class StringToPersonConverter {
+
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy");
 
 
     /**
@@ -27,6 +31,12 @@ public class StringToPersonConverter {
         String[] parts = value.split(",\\s");
         isTrue(parts.length == 3);
 
-        return new Person(parts[0], Person.Gender.findByNameIgnoreCase(parts[1]).get(), parts[2]);
+        LocalDate dobRow = LocalDate.parse(parts[2], DATE_TIME_FORMATTER);
+
+        return new Person(
+                parts[0],
+                Person.Gender.findByNameIgnoreCase(parts[1]).get(),
+                dobRow.isBefore(LocalDate.now()) ? dobRow : dobRow.minusYears(100) // making sure person is born in the past
+        );
     }
 }

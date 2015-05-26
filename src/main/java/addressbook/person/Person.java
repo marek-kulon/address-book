@@ -2,15 +2,19 @@ package addressbook.person;
 
 import org.apache.commons.lang3.Validate;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+/**
+ * Represents entry unit of address book
+ */
 public class Person {
     private final String name;
     private final Gender gender;
-    private final String dateOfBirth;
+    private final LocalDate dateOfBirth;
 
-    public Person(String name, Gender gender, String dateOfBirth) {
+    public Person(String name, Gender gender, LocalDate dateOfBirth) {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.name = name;
@@ -24,7 +28,7 @@ public class Person {
         return gender;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
