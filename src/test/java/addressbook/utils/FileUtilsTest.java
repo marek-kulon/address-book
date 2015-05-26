@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class FileUtilsTest {
 
     @Test
-    public void testReadLinesFileOk() throws Exception {
+    public void testReadLinesFileOk() {
         List<String> lines = FileUtils.readLines("Book");
         assertNotNull(lines);
         assertEquals(2, lines.size());
@@ -18,12 +18,12 @@ public class FileUtilsTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void testReadLinesNullAsFileName() throws Exception {
+    public void testReadLinesNullAsFileName() {
         FileUtils.readLines(null);
     }
 
     @Test(expected = RuntimeException.class)
-    public void testReadLinesFileNotFound() throws Exception {
+    public void testReadLinesFileNotFound() {
         FileUtils.readLines("XYZ");
     }
 
