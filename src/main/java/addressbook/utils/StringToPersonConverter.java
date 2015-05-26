@@ -39,12 +39,13 @@ public class StringToPersonConverter {
         final String lastName = fullNameParts[1];
         final Person.Gender gender = Person.Gender.findByNameIgnoreCase(parts[1]).orElseThrow(() -> new IllegalArgumentException("invalid gender"));
         final LocalDate dobRow = LocalDate.parse(parts[2], DATE_TIME_FORMATTER);
+        final LocalDate dob = dobRow.isBefore(LocalDate.now()) ? dobRow : dobRow.minusYears(100); // making sure person is born in the past
 
         return new Person(
                 firstName,
                 lastName,
                 gender,
-                dobRow.isBefore(LocalDate.now()) ? dobRow : dobRow.minusYears(100) // making sure person is born in the past
+                dob
         );
     }
 }
