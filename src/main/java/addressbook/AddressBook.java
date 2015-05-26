@@ -25,6 +25,7 @@ public class AddressBook {
 
     /**
      * Calculates how many males are in the address book
+     *
      * @return result of calculation
      */
     public long countMales() {
@@ -35,10 +36,25 @@ public class AddressBook {
 
     /**
      * Finds the oldest person in the book
-     * @return oldest person or empty if book has no entries
+     *
+     * @return oldest person or empty result if book has no entries
      */
     public Optional<Person> getOldestPerson() {
         return entries.stream().max(comparing(Person::getDateOfBirth).reversed());
+    }
+
+
+    /**
+     * Finds any person by provided first name
+     *
+     * @return found person or empty result
+     * @throws NullPointerException if first name is null
+     */
+    public Optional<Person> findAnyByFirstName(String firstName) {
+        notNull(firstName);
+        return entries.stream()
+                .filter(person -> firstName.equals(person.getFirstName()))
+                .findAny();
     }
 
 }

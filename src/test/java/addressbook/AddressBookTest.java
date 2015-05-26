@@ -41,10 +41,23 @@ public class AddressBookTest {
         AddressBook addressBook = new AddressBook(Sets.newHashSet(john, alice, robert));
         assertEquals(Optional.of(robert), addressBook.getOldestPerson());
     }
-
     @Test
     public void testGetOldestPersonEmptyBook() {
         AddressBook addressBook = new AddressBook(Sets.newHashSet());
         assertEquals(Optional.empty(), addressBook.getOldestPerson());
     }
+
+    @Test
+    public void testFindAnyByFirstNameOk() {
+        AddressBook addressBook = new AddressBook(Sets.newHashSet(john, alice, robert));
+        assertEquals(Optional.of(robert), addressBook.findAnyByFirstName("Robert"));
+    }
+
+    @Test
+    public void testFindAnyByFirstNameNotFound() {
+        AddressBook addressBook = new AddressBook(Sets.newHashSet(john, alice, robert));
+        assertEquals(Optional.empty(), addressBook.findAnyByFirstName("xyz"));
+    }
+
+
 }
