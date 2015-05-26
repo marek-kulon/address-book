@@ -4,7 +4,7 @@ import addressbook.person.Person;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.NoSuchElementException;
+import java.time.format.DateTimeParseException;
 
 import static org.apache.commons.lang3.Validate.isTrue;
 import static org.apache.commons.lang3.Validate.notEmpty;
@@ -19,11 +19,12 @@ public class StringToPersonConverter {
 
     /**
      * Converts {@link String} value into {@link Person} object by separating value by comma and space sequence
+     *
      * @param value candidate value
      * @return conversion result
-     * @throws NullPointerException if value is null
+     * @throws NullPointerException     if value is null
      * @throws IllegalArgumentException if value is empty or value incorrectly formed
-     * @throws NoSuchElementException if gender is incorrect
+     * @throws DateTimeParseException   if the date of birth cannot be parsed
      */
     public static Person byCommaAndSpaceSeparator(String value) {
         notEmpty(value);
@@ -34,10 +35,9 @@ public class StringToPersonConverter {
         final String[] fullNameParts = parts[0].split("\\s");
         isTrue(fullNameParts.length == 2);
 
-
         final String firstName = fullNameParts[0];
         final String lastName = fullNameParts[1];
-        final Person.Gender gender = Person.Gender.findByNameIgnoreCase(parts[1]).get();
+        final Person.Gender gender = Person.Gender.findByNameIgnoreCase(parts[1]).orElseThrow(() -> new IllegalArgumentException("invalid gender"));
         final LocalDate dobRow = LocalDate.parse(parts[2], DATE_TIME_FORMATTER);
 
         return new Person(

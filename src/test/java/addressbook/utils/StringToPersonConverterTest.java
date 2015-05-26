@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeParseException;
 
 import static addressbook.person.Person.Gender;
 import static org.junit.Assert.assertEquals;
@@ -42,7 +43,22 @@ public class StringToPersonConverterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void byCommaAndSpaceSeparatorIncorrectInput() {
+    public void byCommaAndSpaceSeparatorIncorrectInputLength() {
         StringToPersonConverter.byCommaAndSpaceSeparator("Bill McKnight, Male");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void byCommaAndSpaceSeparatorIncorrectInputFirstOrLastName() {
+        StringToPersonConverter.byCommaAndSpaceSeparator("Bill, Male, 16/10/05");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void byCommaAndSpaceSeparatorIncorrectInputGender() {
+        StringToPersonConverter.byCommaAndSpaceSeparator("Bill McKnight, xxx, 16/10/05");
+    }
+
+    @Test(expected = DateTimeParseException.class)
+    public void byCommaAndSpaceSeparatorIncorrectInputDOB() {
+        StringToPersonConverter.byCommaAndSpaceSeparator("Bill McKnight, Male, 16/10");
     }
 }
