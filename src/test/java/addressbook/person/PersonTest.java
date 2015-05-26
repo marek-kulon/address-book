@@ -12,6 +12,16 @@ import static org.junit.Assert.*;
 
 public class PersonTest {
 
+
+    @Test
+    public void testGetAgeDifferenceInDays() {
+        final Person john = new Person("John", "Smith", MALE, LocalDate.of(1985, APRIL, 11));
+        final Person paul = new Person("Paul", "Smith", MALE, LocalDate.of(1985, APRIL, 25));
+        assertEquals("no difference", 0, john.getAgeDifferenceInDays(john));
+        assertEquals("between john and paul", 14, john.getAgeDifferenceInDays(paul));
+        assertEquals("between paul and john", 14, paul.getAgeDifferenceInDays(john));
+    }
+
     @Test
     public void testEqualsAndHashCode() throws Exception {
         final Person pOne = new Person("John", "Smith", MALE, LocalDate.of(1985, APRIL, 11));

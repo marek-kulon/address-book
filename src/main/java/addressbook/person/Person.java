@@ -1,11 +1,12 @@
 package addressbook.person;
 
-import org.apache.commons.lang3.Validate;
-
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import static org.apache.commons.lang3.Validate.notNull;
 
 /**
  * Represents entry unit of address book
@@ -23,6 +24,20 @@ public class Person {
         this.lastName = lastName;
     }
 
+    /**
+     * Calculates age difference in days
+     * @param other candidate person
+     * @return result of calculation
+     */
+    public long getAgeDifferenceInDays(Person other) {
+        notNull(other);
+        return Math.abs(ChronoUnit.DAYS.between(this.getDateOfBirth(), other.getDateOfBirth()));
+    }
+
+    /*
+    getters & setters
+     */
+
     public String getFirstName() {
         return firstName;
     }
@@ -38,6 +53,10 @@ public class Person {
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
+
+    /*
+    equals & hashCode & toString
+     */
 
     @Override
     public boolean equals(Object o) {
@@ -77,7 +96,7 @@ public class Person {
          * @return found gender or empty value
          */
         public static Optional<Gender> findByNameIgnoreCase(String name) {
-            Validate.notNull(name);
+            notNull(name);
 
             return Stream.of(Gender.values())
                     .filter(val -> val.name().equalsIgnoreCase(name))
