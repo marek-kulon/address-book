@@ -55,6 +55,16 @@ public class Person {
         return Objects.hash(firstName, lastName, gender, dateOfBirth);
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", dateOfBirth=" + dateOfBirth +
+                '}';
+    }
+
     /**
      * Represents gender of person
      */
