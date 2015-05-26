@@ -3,6 +3,7 @@ package addressbook.person;
 import org.apache.commons.lang3.Validate;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -38,6 +39,21 @@ public class Person {
         return dateOfBirth;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName) &&
+                Objects.equals(lastName, person.lastName) &&
+                Objects.equals(gender, person.gender) &&
+                Objects.equals(dateOfBirth, person.dateOfBirth);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, gender, dateOfBirth);
+    }
 
     /**
      * Represents gender of person
