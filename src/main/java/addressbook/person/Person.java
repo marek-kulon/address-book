@@ -28,6 +28,7 @@ public class Person {
      * Calculates age difference in days
      * @param other candidate person
      * @return result of calculation
+     * @throws NullPointerException if other is null
      */
     public long getAgeDifferenceInDays(Person other) {
         notNull(other);
